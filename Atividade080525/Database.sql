@@ -11,7 +11,7 @@ CREATE TABLE Livros (
     id_livro INT AUTO_INCREMENT PRIMARY KEY ,
     titulo VARCHAR(255) NOT NULL,
     ano_publicacao INT NOT NULL,
-    preco DECIMAL(2, 10) NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL,
     id_autor INT NOT NULL,
     CONSTRAINT FK_IdAutor FOREIGN KEY (id_autor) REFERENCES Autores(id_autor) 
 );
@@ -32,3 +32,5 @@ CREATE TABLE Vendas (
     CONSTRAINT FK_IdCliente FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente),
     CONSTRAINT FK_IdLivro FOREIGN KEY (id_livro) REFERENCES Livros(id_livro)
 );  
+
+-- DROP DATABASE Livraria;
