@@ -1,3 +1,4 @@
+-- Inserir autores
 INSERT INTO Autores (nome, nacionalidade)
     VALUES 
         ("Machado de Assis", "BR"),
@@ -6,6 +7,7 @@ INSERT INTO Autores (nome, nacionalidade)
         ("Maurício de Souza", "BR"),
         ("Montero Lobato", "BR");
 
+-- Inserir livros
 INSERT INTO Livros (titulo, ano_publicacao, preco, id_autor)
     VALUES 
         ("Turma da Mônica", 1959, 9.90, 4),
@@ -17,6 +19,7 @@ INSERT INTO Livros (titulo, ano_publicacao, preco, id_autor)
         ("Sentimento do Mundo", 1940, 15.90, 2),
         ("Alguma Poesia", 1930, 15.90, 2);
 
+-- Inserir clientes
 INSERT INTO Clientes (nome, email, cidade)
     VALUES
         ("Duda", "dudinhalealmoranguinho@gmail.com", "Marília"),
@@ -25,6 +28,7 @@ INSERT INTO Clientes (nome, email, cidade)
         ("Daniel", "danielbonfim@gmail.com", "Marília"),
         ("Raquel", "yraquellissa@gmail.com", "Marília");
 
+-- Inserir vendas
 INSERT INTO Vendas (data_venda, quantidade, id_cliente, id_livro)
     VALUES
         ("05-15-2025", 1, 2, 3),
@@ -39,13 +43,15 @@ INSERT INTO Vendas (data_venda, quantidade, id_cliente, id_livro)
         ("05-15-2025", 1, 4, 8),
         ("05-15-2025", 1, 2, 6);
 
+-- Atualizar o preço do livro
 UPDATE Livros
 SET preco = 7.90
 WHERE id_livro = 3;
 
+-- Apagar os clientes que não fizeram nenhuma compra
 DELETE FROM Clientes
 WHERE id_cliente NOT IN (
     SELECT DISTINCT id_cliente FROM Clientes
 );
 
-DROP DATABASE Livraria;
+-- DROP DATABASE Livraria;
