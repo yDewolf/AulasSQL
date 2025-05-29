@@ -24,3 +24,23 @@ JOIN Livros ON Livros.id_autor = Autores.id_autor
 GROUP BY Autores.nome
 HAVING COUNT(Livros.id_livro) > 1;
 
+-- Modulo 5
+
+-- Livros e seus respectivos autores
+SELECT titulo, Autores.nome
+FROM Livros
+INNER JOIN Autores ON Autores.id_autor = Livros.id_autor;
+
+-- Clientes e suas compras
+SELECT Clientes.nome, Livros.titulo, Vendas.data_venda
+FROM Vendas
+INNER JOIN Clientes ON Clientes.id_cliente = Vendas.id_cliente
+INNER JOIN Livros ON Livros.id_livro = Vendas.id_livro;
+
+-- Clientes que compraram livros de estrangeiros
+SELECT Clientes.nome
+FROM Vendas
+INNER JOIN Clientes ON Clientes.id_cliente = Vendas.id_cliente
+INNER JOIN Livros ON Livros.id_livro = Vendas.id_livro
+INNER JOIN Autores ON Autores.id_autor = Livros.id_autor
+WHERE Autores.nacionalidade != "BR";
