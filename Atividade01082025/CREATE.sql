@@ -38,3 +38,5 @@ SELECT
     p.data_pedido
 FROM pedidos P
 JOIN clientes C ON p.id_cliente = C.id;
+
+SELECT * FROM relatorio_pedidos;
