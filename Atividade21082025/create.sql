@@ -47,8 +47,8 @@ CREATE TABLE Emprestimos (
 CREATE VIEW Historico_Emprestimos AS
 SELECT 
     U.nome NomeUsuario,
-    L.titulo,
-    C.descricao,
+    L.titulo TituloLivro,
+    C.descricao CategoriaLivro,
     F.nome NomeFuncionario,
     E.data_retirada,
     E.data_devolucao_prevista,
