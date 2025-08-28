@@ -1,30 +1,41 @@
--- Inserts feitos pelo ChatGPT:
+-- INSERTS PARA TESTES
 
--- Inserindo usuarios
+-- Usuários
 INSERT INTO Usuarios (cpf, nome, tel, address) VALUES
-('12345678901', 'Carlos Silva', '11987654321', 'Rua A, 123, Sao Paulo'),
-('98765432100', 'Ana Oliveira', '11998765432', 'Avenida B, 456, Sao Paulo'),
-('19283746501', 'Joao Santos', '11345678901', 'Rua C, 789, Sao Paulo');
+('11111111111', 'Alice Silva', '999999999', 'Rua das Flores, 123'),
+('22222222222', 'Bruno Souza', '988888888', 'Av. Central, 456');
 
--- Inserindo categorias
+-- Categorias
 INSERT INTO Categorias (nome, descricao) VALUES
-('Ficcao', 'Livros de ficcao e aventura'),
-('Tecnologia', 'Livros sobre tecnologia e inovacao'),
-('Historia', 'Livros sobre historia mundial e brasileira');
+('Romance', 'Livros de romance'),
+('Ficção Científica', 'Livros de ficção com base científica');
 
--- Inserindo livros
-INSERT INTO Livros (titulo, categoria_id, autor) VALUES
-('O Senhor dos Aneis', 1, 'J.R.R. Tolkien'),
-('Aprendendo Python', 2, 'Mark Lutz'),
-('Historia do Brasil', 3, 'Sergio Buarque de Holanda');
+-- Livros
+INSERT INTO Livros (titulo, categoria_id, autor, preco) VALUES
+('Amor em Paris', 1, 'Joana Martins', 45.90),
+('Viagem ao Centro da Terra', 2, 'Júlio Verne', 59.50);
 
--- Inserindo funcionarios
+-- Funcionários
 INSERT INTO Funcionarios (cpf, nome, tel, address, funcao) VALUES
-('11223344556', 'Luciana Mendes', '11911223344', 'Rua D, 10, Sao Paulo', 'Bibliotecaria'),
-('22334455667', 'Roberto Souza', '11922334455', 'Avenida E, 99, Sao Paulo', 'Assistente');
+('33333333333', 'Carlos Mendes', '977777777', 'Rua do Sol, 789', 'Bibliotecário'),
+('44444444444', 'Daniela Lima', '966666666', 'Av. Norte, 321', 'Atendente');
 
--- Inserindo emprestimos
+-- Empréstimos
 INSERT INTO Emprestimos (cpf_usuario, cpf_funcionario, id_livro, data_retirada, data_devolucao_prevista, data_devolucao) VALUES
-('12345678901', '11223344556', 1, '2025-08-01', '2025-08-15', '2025-08-14'),
-('98765432100', '22334455667', 2, '2025-08-05', '2025-08-20', '2025-08-18'),
-('19283746501', '11223344556', 3, '2025-08-10', '2025-08-24', '2025-08-23');
+('11111111111', '33333333333', 1, '2025-08-01', '2025-08-15', '2025-08-10'),
+('22222222222', '44444444444', 2, '2025-08-05', '2025-08-20', '2025-08-21');
+
+-- Fornecedores
+INSERT INTO Fornecedores (cnpj, nome, telefone) VALUES
+('12345678000199', 'Distribuidora Alfa', '955555555'),
+('98765432000188', 'Editora Beta', '944444444');
+
+-- Compras
+INSERT INTO Compras (cnpj_fornecedor, cpf_funcionario, valor_total, data_compra) VALUES
+('12345678000199', '33333333333', 150.00, '2025-07-15 10:30:00'),
+('98765432000188', '44444444444', 200.00, '2025-08-10 14:45:00');
+
+-- CompraLivro
+INSERT INTO CompraLivro (id_livro, id_compra, quantidade) VALUES
+(1, 1, 2),
+(2, 2, 3);
