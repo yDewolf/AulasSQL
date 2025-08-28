@@ -19,7 +19,8 @@ CREATE TABLE Livros (
     id INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(255) NOT NULL,
     categoria_id INT NOT NULL, 
-    autor VARCHAR(255),
+    autor VARCHAR(255) NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (categoria_id) REFERENCES Categorias(id)
 );
 
@@ -44,17 +45,26 @@ CREATE TABLE Emprestimos (
     FOREIGN KEY (id_livro) REFERENCES Livros(id)
 );
 
-CREATE VIEW Historico_Emprestimos AS
-SELECT 
-    U.nome NomeUsuario,
-    L.titulo TituloLivro,
-    C.descricao CategoriaLivro,
-    F.nome NomeFuncionario,
-    E.data_retirada,
-    E.data_devolucao_prevista,
-    E.data_devolucao
-FROM Emprestimos E
-JOIN Usuarios U ON U.cpf = E.cpf_usuario
-JOIN Livros L ON L.id = E.id_livro
-JOIN Categorias C ON L.categoria_id = C.id
-JOIN Funcionarios F ON F.cpf = E.cpf_funcionario
+CREATE TABLE Fornecedores (
+    cnpj CHAR(14) PRIMARY KEY NOT NULL,
+    nome VARCHAR(127) NOT NULL,
+    telefone CHAR(9) NOT NULL
+);
+
+CREATE TABLE Compras (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    cnpj_fornecedor CHAR(14) NOT NULL,
+    cpf_funcionario CHAR(14) NOT NULL,
+    valor_total DECIMAL(10, 2) NOT NULL,
+    data_compra DATETIME NOT NULL DEFAULT NOW(),
+    FOREIGN KEY (cnpj_fornecedor) REFERENCES Fornecedores(cnpj),
+    FOREIGN KEY (cpf_funcionario) REFERENCES Funcionarios(cpf)
+);
+
+CREATE TABLE CompraLivro (
+    id_livro INT NOT NULL,
+    id_compra INT NOT NULL,
+    quantidade INT NOT NULL,
+    FOREIGN KEY (id_livro) REFERENCES Livros(id),
+    FOREIGN KEY (id_compra) REFERENCES Compras(id)
+);
