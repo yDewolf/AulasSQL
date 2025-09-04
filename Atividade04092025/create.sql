@@ -1,11 +1,13 @@
 CREATE DATABASE Hospital;
 USE Hospital;
 
+-- Tabela de Especialidades
 CREATE TABLE Especialidades (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL
 );
 
+-- Tabela de médicos
 CREATE TABLE Medicos (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
@@ -14,6 +16,7 @@ CREATE TABLE Medicos (
     FOREIGN KEY (id_especialidade) REFERENCES Especialidades(id)
 );
 
+-- Tabela de Atendimentos
 CREATE TABLE Atendimentos (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome_paciente VARCHAR(255) NOT NULL,
@@ -22,6 +25,10 @@ CREATE TABLE Atendimentos (
     FOREIGN KEY (id_medico) REFERENCES Medicos(id)
 );
 
+-- Criar a view de atendimentos
+-- Mostra informações sobre a especialidade
+-- do médico e seu contato, o código do atendimento
+-- nome do paciente e data de atendimento
 CREATE VIEW Equipe_Atendimento AS
 SELECT 
     E.id IdEspecialidade,
