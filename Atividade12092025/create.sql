@@ -92,3 +92,38 @@ JOIN Produtos P ON IP.id_produto = P.id
 JOIN Categorias Cat ON P.id_categoria = Cat.id
 GROUP BY Cat.nome;
 
+CREATE VIEW Cliente_TotalPedidos AS
+SELECT 
+    C.nome,
+    C.cidade,
+    SUM(IP.quantidade)
+FROM Itens_Pedido IP
+INNER JOIN Pedidos P ON IP.id_pedido = P.id
+INNER JOIN Clientes C ON P.id_cliente = C.id
+GROUP BY C.nome;
+
+CREATE VIEW Vendedor_Faturamento AS
+SELECT
+    V.nome,
+    COUNT(P.id),
+    SUM(P.valor_total)
+FROM Vendedores V
+INNER JOIN Pedidos P ON P.id_vendedor = V.id;
+GROUP BY V.nome;
+
+-- Acho que essa aqui tá errada
+-- CREATE VIEW Produtos_NaoVendidos AS
+-- SELECT 
+--     Prod.nome
+-- FROM Produtos Prod
+-- INNER JOIN Pedidos P ON P.id_produto = Prod.id;
+-- WHERE P.id_cliente IS NULL;
+
+-- Essa aqui também parece errada
+CREATE VIEW Clientes_Premium AS
+SELECT
+    C.nome,
+    C.cidade
+FROM Clientes C
+JOIN Pedidos P ON P.id_cliente = C.id_cliente
+WHERE COUNT(P.id) >= 10;
