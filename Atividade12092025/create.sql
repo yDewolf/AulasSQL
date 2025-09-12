@@ -46,3 +46,20 @@ CREATE TABLE Itens_Pedido (
     FOREIGN KEY (id_produto) REFERENCES Produtos(id)
 );
 
+CREATE VIEW Boletim_Pedidos AS
+SELECT 
+    P.id,
+    C.nome,
+    P.data_pedido,
+    P.valor_total,
+    C.cidade
+FROM Pedidos P
+JOIN Clientes C ON P.id_cliente = C.id;
+
+CREATE VIEW Produto_Categoria AS
+SELECT 
+    Produtos.nome NomeProduto,
+    Categorias.nome NomeCategoria
+FROM Produtos
+JOIN Categorias ON Produtos.id_categoria = Categorias.id;
+
