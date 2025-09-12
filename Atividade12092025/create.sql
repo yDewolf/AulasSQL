@@ -63,3 +63,32 @@ SELECT
 FROM Produtos
 JOIN Categorias ON Produtos.id_categoria = Categorias.id;
 
+CREATE VIEW Vendedor_Pedido AS
+SELECT 
+    V.nome NomeVendedor,
+    P.id,
+    C.nome NomeCliente,
+    P.data_pedido
+FROM Pedidos P
+JOIN Vendedores V ON P.id_vendedor = V.id
+JOIN Clientes C ON P.id_cliente = C.id
+GROUP BY V.id;
+
+CREATE VIEW Cliente_MaiorCompra AS
+SELECT 
+    C.nome,
+    P.data_pedido,
+    P.valor_total
+FROM Pedidos P
+JOIN Clientes C ON P.id_cliente = C.id
+WHERE P.valor_total > 5000;
+
+CREATE VIEW Categoria_MaisVendida AS
+SELECT 
+    Cat.nome,
+    SUM(IP.quantidade)
+FROM Itens_Pedido IP
+JOIN Produtos P ON IP.id_produto = P.id
+JOIN Categorias Cat ON P.id_categoria = Cat.id
+GROUP BY Cat.nome;
+
