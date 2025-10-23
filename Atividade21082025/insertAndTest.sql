@@ -39,3 +39,6 @@ INSERT INTO Compras (cnpj_fornecedor, cpf_funcionario, valor_total, data_compra)
 INSERT INTO CompraLivro (id_livro, id_compra, quantidade) VALUES
 (1, 1, 2),
 (2, 2, 3);
+
+CALL Proc_UsuariosComEmprestimosAtrasados();
+CALL Proc_ComprasPorFornecedor("98765432000188");

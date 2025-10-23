@@ -68,3 +68,33 @@ CREATE TABLE CompraLivro (
     FOREIGN KEY (id_livro) REFERENCES Livros(id),
     FOREIGN KEY (id_compra) REFERENCES Compras(id)
 );
+
+DELIMITER $$
+CREATE PROCEDURE Proc_UsuariosComEmprestimosAtrasados(
+    -- OUT usuarios_devendo
+)
+BEGIN
+    SELECT U.nome, U.tel FROM usuarios U 
+    INNER JOIN Emprestimos E ON E.cpf_usuario = U.cpf
+    WHERE E.data_devolucao_prevista < NOW();
+END $$
+DELIMITER ; 
+
+DELIMITER $$
+CREATE PROCEDURE Proc_ComprasPorFornecedor(
+    IN cnpj CHAR(14)
+)
+BEGIN 
+    SELECT 
+        valor_total, data_compra, 
+        F.nome AS NomeFornecedor, 
+        F.telefone AS TelefoneFornecedor,
+        Fn.nome AS NomeFuncionario, 
+        Fn.cpf AS CPFFuncionario, 
+        Fn.tel AS TelefoneFuncionario
+    FROM Compras C
+    INNER JOIN Fornecedores F ON C.cnpj_fornecedor = F.cnpj
+    INNER JOIN Funcionarios Fn ON Fn.cpf = C.cpf_funcionario
+    WHERE F.cnpj = cnpj;
+END $$
+DELIMITER ;
