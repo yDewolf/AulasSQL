@@ -100,3 +100,43 @@ DELIMITER ;
 
 CALL contar_locais_regiao("Sudeste", @total);
 SELECT @total;
+
+DELIMITER $$
+CREATE PROCEDURE inserir_locais_loop()
+BEGIN
+    DECLARE idx INT DEFAULT 1;
+    LOOP_INSERIR: LOOP
+        IF idx > 3 THEN
+            LEAVE LOOP_INSERIR;
+        END IF;
+
+        INSERT INTO locais(nome_cliente, cidade, estado, regiao)
+        VALUES (CONCAT("Cliente ", idx), "Cidade Exemplo", "EX", "Região X");
+
+        SET idx = idx + 1;
+    END LOOP LOOP_INSERIR;
+END $$
+DELIMITER ;
+
+CALL inserir_locais_loop();
+SELECT * FROM locais;
+
+DELIMITER $$
+CREATE PROCEDURE classificar_por_regiao(
+    IN p_id INT,
+    OUT classificacao VARCHAR(63)
+)
+BEGIN 
+    DECLARE reg VARCHAR(63);
+    SELECT regiao INTO reg FROM locais WHERE id = p_id;
+
+    CASE reg
+        WHEN "Sudeste" THEN SET classificacao = "Região desenvolvida";
+        WHEN "NORTE" THEN SET classificacao = "Região amazônica";
+        ELSE SET classificacao = "Outra região";
+    END CASE;
+END $$
+DELIMITER ;
+
+CALL classificar_por_regiao(1, @classificacao);
+SELECT @classificacao;
