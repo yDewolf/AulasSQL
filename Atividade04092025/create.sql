@@ -1,3 +1,4 @@
+DROP DATABASE Hospital;
 CREATE DATABASE Hospital;
 USE Hospital;
 
@@ -40,3 +41,18 @@ SELECT
 FROM Atendimentos A
 JOIN Medicos M ON A.id_medico = M.id
 JOIN Especialidades E ON M.id_especialidade = E.id;
+
+DELIMITER $$
+CREATE PROCEDURE Proc_AtendimentosPorEspecialidade (
+    IN especialidade_id INT
+)
+BEGIN 
+    SELECT 
+        nome_paciente, 
+        data_atendimento, 
+        M.nome as NomeMedico
+    FROM Atendimentos A
+    INNER JOIN Medicos M ON A.id_medico = M.id
+    WHERE M.id_especialidade = especialidade_id;
+END $$
+DELIMITER ;

@@ -20,3 +20,5 @@ INSERT INTO Atendimentos (nome_paciente, data_atendimento, id_medico) VALUES
 ('Luciana Alves', '2024-04-12 16:45:00', 4),
 ('Rafael Mendes', '2024-05-07 11:00:00', 1),
 ('Beatriz Santos', '2024-05-18 13:30:00', 2);
+
+CALL Proc_AtendimentosPorEspecialidade(1);
