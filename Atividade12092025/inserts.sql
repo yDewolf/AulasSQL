@@ -46,3 +46,7 @@ INSERT INTO Itens_Pedido (id_pedido, id_produto, quantidade) VALUES
 (9, 3, 1),
 (10, 3, 1),
 (11, 3, 1);
+
+CALL Relatorio_Pedidos_Por_Periodo('2024-05-01', '2024-05-06');
+CALL Relatorio_Produtos_Por_Categoria(1);
+CALL Relatorio_Equipe_Projeto(1);
